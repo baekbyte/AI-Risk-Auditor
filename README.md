@@ -1,4 +1,4 @@
-# AI Decision Transparency Simulator
+# Ethical AI Sandbox
 
 This is a Java-based simulator that models ethical decision-making in AI systems, allowing users to explore different ethical frameworks and their impact on AI decision-making processes.
 

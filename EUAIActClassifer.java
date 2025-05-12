@@ -53,7 +53,7 @@ public class EUAIActClassifer {
         }
     }
 
-    /* Checking whether user's AI system is prohibited
+    /* Checking whether user's AI system is prohibited.
      * @param scnr to take user input
      * @return true/false -> if prohibited risk/not prohibited risk
      */
@@ -74,7 +74,7 @@ public class EUAIActClassifer {
         return result;
     }
 
-    /* Checking whether user's AI system is high risk
+    /* Checking whether user's AI system is high risk.
      * @param scnr to take user input
      * @return true/false -> if high risk/not high risk
      */
@@ -83,7 +83,7 @@ public class EUAIActClassifer {
         return false;
     }
 
-    /* Checking whether user's AI system needs transparency requirments
+    /* Checking whether user's AI system needs transparency requirments.
      * @param scnr to take user input
      * @return true/false -> if transparency requirments are needed/not needed
      */
@@ -91,8 +91,10 @@ public class EUAIActClassifer {
         return false;
     }
 
-    /*
-     * 
+    /* Helper method to prompt user with yes or no.
+     * @param scnr to take user input
+     * @param question to prompt user with question
+     * @return true/false if y/n
      */
     private static boolean promptYesNo(Scanner scnr, String question) {
         System.out.print(question + " (y/n): ");

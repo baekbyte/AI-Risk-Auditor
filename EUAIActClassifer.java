@@ -54,6 +54,7 @@ public class EUAIActClassifer {
         
         // Displaying Result
         displayResult(systemName, systemPurpose, riskCategory);
+        List<String> recommendations = generateRecommendations(riskCategory);
 
     }
 
@@ -145,6 +146,31 @@ public class EUAIActClassifer {
 
         }
     }
+
+
+    private static List<String> generateRecommendations(String riskCategory) {
+
+        List<String> recommendations = new ArrayList<>();
+
+        switch (riskCategory) {
+            case "High-Risk":
+                // refer to sections 2-5 of chapter 3 of EU AI Act
+            break;
+
+            case "Limited Risk":
+                // refer to article 50 of chapter 4 of EU AI Act
+            break;
+
+            case "Minimal Risk":
+                // refer to articles 53-56 of chapter 5 of EU AI Act
+            break;
+
+
+        }
+
+        return recommendations;
+    }
+
 
     /* Helper method to prompt user with yes or no.
      * @param scnr to take user input

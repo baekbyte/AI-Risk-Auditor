@@ -51,6 +51,10 @@ public class EUAIActClassifer {
         } else {
             riskCategory = "Minimal Risk";
         }
+        
+        // Displaying Result
+        displayResult(systemName, systemPurpose, riskCategory);
+
     }
 
     /* Checking whether user's AI system is prohibited.
@@ -79,8 +83,23 @@ public class EUAIActClassifer {
      * @return true/false -> if high risk/not high risk
      */
     private static boolean checkHighRiskUseCase(Scanner scnr) {
+        System.out.println("--- HIGH-RISK AI PRACTICES ASSESSMENT ---");
+        
+        System.out.println("Is your AI system used in any of these domains?");
+        boolean result = false;
 
-        return false;
+        result |= promptYesNo(scnr, "Biometrics where it's intended to be used for identification, categorisation, or emotional recognition systems");
+        result |= promptYesNo(scnr, "Critical infrastructure where it poses safety risks?");
+        result |= promptYesNo(scnr, "Educational or vocational training with significant impact on access to education?");
+        result |= promptYesNo(scnr, "Employment, worker management, or access to self-employment?");
+        result |= promptYesNo(scnr, "Access to essential private or public services (e.g., credit scoring, social benefits)?");
+        result |= promptYesNo(scnr, "Law enforcement with significant impact on people's lives?");
+        result |= promptYesNo(scnr, "Migration, asylum, or border control management?");
+        result |= promptYesNo(scnr, "Administration of justice and democratic processes?");
+
+        boolean isSafetyComponent = promptYesNo(scnr, "Is your AI system is a safety component of a product or a product itself covered by the Union harmonisation legislation");
+
+        return result || isSafetyComponent;
     }
 
     /* Checking whether user's AI system needs transparency requirments.
@@ -88,9 +107,45 @@ public class EUAIActClassifer {
      * @return true/false -> if transparency requirments are needed/not needed
      */
     private static boolean checkTransparencyRequirements(Scanner scnr) {
-        return false;
+        System.out.println("--- TRANSPARENCY ASSESSMENT ---");
+    
+        boolean result = false;
+
+        result |= promptYesNo(scnr, "Does your system interact with humans (e.g. chatbots)?");
+        result |= promptYesNo(scnr, "Does your system generate or manipulate content (e.g. deepfakes)?");
+        result |= promptYesNo(scnr, "Does your system use emotion recognition or biometric categorization?");
+        
+        return result;
     }
 
+    /* Printing results of the risk assessment.
+     * @param systemName name of the user's AI system
+     * @param systemPurpose purpose of the user's AI system
+     * @param riskCategory (High-Risk, Limited Risk, Minimal Risk)
+     */
+    private static void displayResult(String systemName, String systemPurpose, String riskCategory) {
+        switch (riskCategory) {
+            case "High-Risk":
+                System.out.println("High-risk AI systems require substantial compliance measures");
+                System.out.println("under the EU AI Act, including risk assessments, technical");
+                System.out.println("documentation, and human oversight.");
+                break;
+
+            case "Limited Risk":
+                System.out.println("Limited risk AI systems must meet specific transparency");
+                System.out.println("obligations, such as notifying users they are interacting");
+                System.out.println("with an AI system or that content is artificially generated.");
+                break;
+
+            case "Minimal Risk":
+                System.out.println("Minimal risk AI systems have few regulatory obligations");
+                System.out.println("under the EU AI Act, though voluntary codes of conduct");
+                System.out.println("are encouraged.");
+                break;
+
+        }
+    }
+    
     /* Helper method to prompt user with yes or no.
      * @param scnr to take user input
      * @param question to prompt user with question

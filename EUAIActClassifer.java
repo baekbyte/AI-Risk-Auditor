@@ -27,8 +27,6 @@ public class EUAIActClassifer {
         systemPurpose = scnr.nextLine();
 
         
-        boolean isHighRisk = checkHighRiskUseCase(scnr);
-        
         // Determine if the system is prohibited
         boolean isProhibited = checkProhibitedUseCase(scnr);
         
@@ -38,6 +36,8 @@ public class EUAIActClassifer {
             System.out.println("Consider consulting with a legal expert specializing in AI regulation.");
             return;
         }
+
+        boolean isHighRisk = checkHighRiskUseCase(scnr);
 
         // Determine transparency requirements
         boolean needsTransparency = checkTransparencyRequirements(scnr);
@@ -62,7 +62,7 @@ public class EUAIActClassifer {
      * @return true/false -> if prohibited risk/not prohibited risk
      */
     private static boolean checkProhibitedUseCase(Scanner scnr) {
-        System.out.println("--- PROHIBITED AI PRACTICES ASSESSMENT ---");
+        System.out.println("\n--- PROHIBITED AI PRACTICES ASSESSMENT ---");
 
         boolean result = false;
 
@@ -83,7 +83,7 @@ public class EUAIActClassifer {
      * @return true/false -> if high risk/not high risk
      */
     private static boolean checkHighRiskUseCase(Scanner scnr) {
-        System.out.println("--- HIGH-RISK AI PRACTICES ASSESSMENT ---");
+        System.out.println("\n--- HIGH-RISK AI PRACTICES ASSESSMENT ---");
         
         System.out.println("Is your AI system used in any of these domains?");
         boolean result = false;
@@ -107,7 +107,7 @@ public class EUAIActClassifer {
      * @return true/false -> if transparency requirments are needed/not needed
      */
     private static boolean checkTransparencyRequirements(Scanner scnr) {
-        System.out.println("--- TRANSPARENCY ASSESSMENT ---");
+        System.out.println("\n--- TRANSPARENCY ASSESSMENT ---");
     
         boolean result = false;
 
@@ -126,26 +126,26 @@ public class EUAIActClassifer {
     private static void displayResult(String systemName, String systemPurpose, String riskCategory) {
         switch (riskCategory) {
             case "High-Risk":
-                System.out.println("High-risk AI systems require substantial compliance measures");
+                System.out.println("\nHigh-risk AI systems require substantial compliance measures");
                 System.out.println("under the EU AI Act, including risk assessments, technical");
                 System.out.println("documentation, and human oversight.");
                 break;
 
             case "Limited Risk":
-                System.out.println("Limited risk AI systems must meet specific transparency");
+                System.out.println("\nLimited risk AI systems must meet specific transparency");
                 System.out.println("obligations, such as notifying users they are interacting");
                 System.out.println("with an AI system or that content is artificially generated.");
                 break;
 
             case "Minimal Risk":
-                System.out.println("Minimal risk AI systems have few regulatory obligations");
+                System.out.println("\nMinimal risk AI systems have few regulatory obligations");
                 System.out.println("under the EU AI Act, though voluntary codes of conduct");
                 System.out.println("are encouraged.");
                 break;
 
         }
     }
-    
+
     /* Helper method to prompt user with yes or no.
      * @param scnr to take user input
      * @param question to prompt user with question

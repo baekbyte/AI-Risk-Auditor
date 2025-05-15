@@ -56,6 +56,8 @@ public class EUAIActClassifer {
         displayResult(systemName, systemPurpose, riskCategory);
         List<String> recommendations = generateRecommendations(riskCategory);
 
+        displayRecommendations(recommendations);
+
     }
 
     /* Checking whether user's AI system is prohibited.
@@ -125,6 +127,15 @@ public class EUAIActClassifer {
      * @param riskCategory (High-Risk, Limited Risk, Minimal Risk)
      */
     private static void displayResult(String systemName, String systemPurpose, String riskCategory) {
+        System.out.println("\n===============================================");
+        System.out.println("  CLASSIFICATION RESULTS");
+        System.out.println("===============================================");
+        System.out.println("System: " + systemName);
+        System.out.println("Purpose: " + systemPurpose);
+        System.out.println("EU AI Act Classification: " + riskCategory);
+        
+        System.out.println("\nRisk Category Explanation:");
+        
         switch (riskCategory) {
             case "High-Risk":
                 System.out.println("\nHigh-risk AI systems require substantial compliance measures");
@@ -148,6 +159,10 @@ public class EUAIActClassifer {
     }
 
 
+    /* Generating recommendations for AI systems.
+     * @param riskCategory
+     * @return recommendations the ArrayList of recommendations
+     */
     private static List<String> generateRecommendations(String riskCategory) {
 
         List<String> recommendations = new ArrayList<>();
@@ -155,14 +170,59 @@ public class EUAIActClassifer {
         switch (riskCategory) {
             case "High-Risk":
                 // refer to sections 2-5 of chapter 3 of EU AI Act
+                
+                // Risk management system
+                recommendations.add("Implement a comprehensive risk management system that operates throughout the system lifecycle");
+                recommendations.add("Conduct and document thorough risk assessments");
+                
+                // Data governance
+                recommendations.add("Establish data governance measures addressing training, validation, and testing data");
+                recommendations.add("Ensure datasets are relevant, representative, and free from errors");
+                
+                // Technical documentation
+                recommendations.add("Maintain detailed technical documentation before market placement");
+                recommendations.add("Document system architecture, capabilities, limitations, and performance metrics");
+                
+                // Record keeping
+                recommendations.add("Implement automatic logging of events while the system is operating");
+                recommendations.add("Ensure traceability throughout the system lifecycle");
+                
+                // Transparency
+                recommendations.add("Provide clear information to users about capabilities, limitations, and purpose");
+                recommendations.add("Document oversight measures and human-AI interaction capabilities");
+                
+                // Human oversight
+                recommendations.add("Design system to allow for effective oversight by humans");
+                recommendations.add("Implement 'stop' buttons or similar intervention measures");
+                
+                // Accuracy and robustness
+                recommendations.add("Develop with appropriate levels of accuracy and cybersecurity measures");
+                recommendations.add("Test for potential discriminatory impacts and implement mitigations");
+                
+                // Conformity assessment
+                recommendations.add("Undergo formal conformity assessment before deployment");
+                recommendations.add("Register in the EU database before putting the system into service");
+
             break;
 
             case "Limited Risk":
                 // refer to article 50 of chapter 4 of EU AI Act
+
+                recommendations.add("Notify users that they are interacting with an AI system");
+                recommendations.add("Clearly label AI-generated or manipulated content");
+                recommendations.add("Design notifications to be accessible and difficult to miss");
+                recommendations.add("Ensure users can make informed choices based on transparent disclosures");
+                recommendations.add("Document transparency measures implemented in the system");
             break;
 
             case "Minimal Risk":
                 // refer to articles 53-56 of chapter 5 of EU AI Act
+
+                recommendations.add("Consider adopting voluntary codes of conduct");
+                recommendations.add("Follow AI ethics principles as a matter of good practice");
+                recommendations.add("Stay informed of regulatory developments");
+                recommendations.add("Consider implementing selected high-risk requirements as best practice");
+                recommendations.add("Document your system's purpose and basic functioning");
             break;
 
 
@@ -171,6 +231,20 @@ public class EUAIActClassifer {
         return recommendations;
     }
 
+    /* Printing the recommendations post-risk assessment.
+     * @param recommendations
+     */
+    private static void displayRecommendations(List<String> recommendations) {
+        int count = 1;
+
+        for(String recommendation : recommendations) {
+            System.out.println(count + ": " + recommendation);
+            count++;
+
+        }
+
+
+    }
 
     /* Helper method to prompt user with yes or no.
      * @param scnr to take user input

@@ -121,7 +121,7 @@ public class EUAIActClassifer {
             writer.newLine();
 
 
-            // Rrisk category explanation
+            // Risk category explanation
             writer.write("Risk Category Explanation:");
             writer.newLine();
             switch (riskCategory) {
@@ -150,7 +150,7 @@ public class EUAIActClassifer {
             writer.newLine();
             writer.newLine();
 
-            // Write recommendations
+            // Recommendations
             writer.write("COMPLIANCE RECOMMENDATIONS");
             writer.newLine();
             writer.write("-------------------------");

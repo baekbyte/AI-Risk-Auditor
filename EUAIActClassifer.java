@@ -1,4 +1,5 @@
 import java.util.*; 
+import java.io.*;
 
 /*
  * EU AI Act Risk Classifier
@@ -58,10 +59,136 @@ public class EUAIActClassifer {
 
         displayRecommendations(recommendations);
 
+        // Asking user whether to save to file
+        boolean saveToFile = promptYesNo(scnr, "Would you like to save the results and recommendation to a file?");
+        if(saveToFile) {
+            System.out.println("Enter file name without extension: ");
+            String fileName = scnr.nextLine();
+            fileResults(fileName, systemName, systemPurpose, riskCategory, recommendations);
+        }
+
+        System.out.println("\nThank you for using the EU AI Act Risk Classification Tool.");
+        scnr.close();
+
+    }
+
+    /* Saving results and recommednations to an external txt file.
+     * @param fileName Name for the file (without extension)
+     * @param systemName Name of the AI system
+     * @param systemPurpose Purpose of the AI system
+     * @param riskCategory EU AI Act risk classification
+     * @param recommendations List of compliance recommendations
+     */
+    private static void fileResults(String fileName, String systemName, String systemPurpose, String riskCategory, List<String> recommendations) {
+
+        try {
+
+            // Ensuring the file has .txt extension
+            if (!fileName.toLowerCase().endsWith(".txt")) {
+                fileName += ".txt";
+            }
+
+            FileWriter fileWriter = new FileWriter(fileName);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
+
+            // Header
+            writer.write("=================================================");
+            writer.newLine();
+            writer.write("EU AI ACT RISK CLASSIFICATION ASSESSMENT");
+            writer.newLine();
+            writer.write("=================================================");
+            writer.newLine();
+            writer.newLine();
+
+            // System details
+            writer.write("SYSTEM INFORMATION");
+            writer.newLine();
+            writer.write("-----------------");
+            writer.newLine();
+            writer.write("System Name: " + systemName);
+            writer.newLine();
+            writer.write("System Purpose: " + systemPurpose);
+            writer.newLine();
+            writer.newLine();
+            
+            // Classification results
+            writer.write("CLASSIFICATION RESULT");
+            writer.newLine();
+            writer.write("-------------------");
+            writer.newLine();
+            writer.write("EU AI Act Classification: " + riskCategory);
+            writer.newLine();
+            writer.newLine();
+
+
+            // Rrisk category explanation
+            writer.write("Risk Category Explanation:");
+            writer.newLine();
+            switch (riskCategory) {
+                case "High-Risk":
+                    writer.write("High-risk AI systems require substantial compliance measures ");
+                    writer.newLine();
+                    writer.write("under the EU AI Act, including risk assessments, technical ");
+                    writer.newLine();
+                    writer.write("documentation, and human oversight.");
+                    break;
+                case "Limited Risk":
+                    writer.write("Limited risk AI systems must meet specific transparency ");
+                    writer.newLine();
+                    writer.write("obligations, such as notifying users they are interacting ");
+                    writer.newLine();
+                    writer.write("with an AI system or that content is artificially generated.");
+                    break;
+                case "Minimal Risk":
+                    writer.write("Minimal risk AI systems have few regulatory obligations ");
+                    writer.newLine();
+                    writer.write("under the EU AI Act, though voluntary codes of conduct ");
+                    writer.newLine();
+                    writer.write("are encouraged.");
+                    break;
+            }
+            writer.newLine();
+            writer.newLine();
+
+            // Write recommendations
+            writer.write("COMPLIANCE RECOMMENDATIONS");
+            writer.newLine();
+            writer.write("-------------------------");
+            writer.newLine();
+            int count = 1;
+            for (String recommendation : recommendations) {
+                writer.write(count + ". " + recommendation);
+                writer.newLine();
+                count++;
+            }
+            writer.newLine();
+
+            // Disclaimer
+            writer.write("=================================================");
+            writer.newLine();
+            writer.write("DISCLAIMER: This assessment is provided for informational purposes only ");
+            writer.newLine();
+            writer.write("and should not be considered legal advice. Consult with legal experts ");
+            writer.newLine();
+            writer.write("for a comprehensive compliance assessment with the EU AI Act.");
+            writer.newLine();
+            writer.write("=================================================");
+            
+            writer.close();
+            
+            System.out.println("Results successfully saved to file: " + fileName);
+
+        } catch (IOException e) {
+            System.out.println("Error saving results to file: " + e.getMessage());
+        }
+
+        
+        
+
     }
 
     /* Checking whether user's AI system is prohibited.
-     * @param scnr to take user input
+     * @param scnr To take user input
      * @return true/false -> if prohibited risk/not prohibited risk
      */
     private static boolean checkProhibitedUseCase(Scanner scnr) {
@@ -82,7 +209,7 @@ public class EUAIActClassifer {
     }
 
     /* Checking whether user's AI system is high risk.
-     * @param scnr to take user input
+     * @param scnr To take user input
      * @return true/false -> if high risk/not high risk
      */
     private static boolean checkHighRiskUseCase(Scanner scnr) {
@@ -106,7 +233,7 @@ public class EUAIActClassifer {
     }
 
     /* Checking whether user's AI system needs transparency requirments.
-     * @param scnr to take user input
+     * @param scnr To take user input
      * @return true/false -> if transparency requirments are needed/not needed
      */
     private static boolean checkTransparencyRequirements(Scanner scnr) {
@@ -122,8 +249,8 @@ public class EUAIActClassifer {
     }
 
     /* Printing results of the risk assessment.
-     * @param systemName name of the user's AI system
-     * @param systemPurpose purpose of the user's AI system
+     * @param systemName Name of the user's AI system
+     * @param systemPurpose Purpose of the user's AI system
      * @param riskCategory (High-Risk, Limited Risk, Minimal Risk)
      */
     private static void displayResult(String systemName, String systemPurpose, String riskCategory) {
@@ -161,7 +288,7 @@ public class EUAIActClassifer {
 
     /* Generating recommendations for AI systems.
      * @param riskCategory
-     * @return recommendations the ArrayList of recommendations
+     * @return recommendations The ArrayList of recommendations
      */
     private static List<String> generateRecommendations(String riskCategory) {
 
@@ -247,8 +374,8 @@ public class EUAIActClassifer {
     }
 
     /* Helper method to prompt user with yes or no.
-     * @param scnr to take user input
-     * @param question to prompt user with question
+     * @param scnr To take user input
+     * @param question To prompt user with question
      * @return true/false if y/n
      */
     private static boolean promptYesNo(Scanner scnr, String question) {

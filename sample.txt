@@ -1,0 +1,42 @@
+=================================================
+EU AI ACT RISK CLASSIFICATION ASSESSMENT
+=================================================
+
+SYSTEM INFORMATION
+-----------------
+System Name: SampleAI
+System Purpose: The purpose of this system is to...
+
+CLASSIFICATION RESULT
+-------------------
+EU AI Act Classification: High-Risk
+
+Risk Category Explanation:
+High-risk AI systems require substantial compliance measures 
+under the EU AI Act, including risk assessments, technical 
+documentation, and human oversight.
+
+COMPLIANCE RECOMMENDATIONS
+-------------------------
+1. Implement a comprehensive risk management system that operates throughout the system lifecycle
+2. Conduct and document thorough risk assessments
+3. Establish data governance measures addressing training, validation, and testing data
+4. Ensure datasets are relevant, representative, and free from errors
+5. Maintain detailed technical documentation before market placement
+6. Document system architecture, capabilities, limitations, and performance metrics
+7. Implement automatic logging of events while the system is operating
+8. Ensure traceability throughout the system lifecycle
+9. Provide clear information to users about capabilities, limitations, and purpose
+10. Document oversight measures and human-AI interaction capabilities
+11. Design system to allow for effective oversight by humans
+12. Implement 'stop' buttons or similar intervention measures
+13. Develop with appropriate levels of accuracy and cybersecurity measures
+14. Test for potential discriminatory impacts and implement mitigations
+15. Undergo formal conformity assessment before deployment
+16. Register in the EU database before putting the system into service
+
+=================================================
+DISCLAIMER: This assessment is provided for informational purposes only 
+and should not be considered legal advice. Consult with legal experts 
+for a comprehensive compliance assessment with the EU AI Act.
+=================================================

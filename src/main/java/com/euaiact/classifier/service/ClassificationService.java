@@ -106,39 +106,40 @@ public class ClassificationService {
         List<String> recommendations = new ArrayList<>();
         
 
-        // TODO: Edit the descriptions of the recommendations to be more specific to the EU AI Act according to original JAVA file
-
         switch (riskCategory) {
             case "High-Risk":
-                recommendations.add("Conduct a comprehensive risk assessment");
-                recommendations.add("Prepare technical documentation");
-                recommendations.add("Implement human oversight mechanisms");
-                recommendations.add("Ensure data quality and governance");
-                recommendations.add("Register the system in the EU database");
-                recommendations.add("Implement appropriate risk management measures");
-                recommendations.add("Ensure system robustness and security");
-                recommendations.add("Maintain detailed logs of system operations");
-                recommendations.add("Establish a quality management system");
-                recommendations.add("Prepare for conformity assessment");
+                recommendations.add("Implement a comprehensive risk management system that operates throughout the system lifecycle");
+                recommendations.add("Conduct and document thorough risk assessments");
+                recommendations.add("Establish data governance measures addressing training, validation, and testing data");
+                recommendations.add("Ensure datasets are relevant, representative, and free from errors");
+                recommendations.add("Maintain detailed technical documentation before market placement");
+                recommendations.add("Document system architecture, capabilities, limitations, and performance metrics");
+                recommendations.add("Implement automatic logging of events while the system is operating");
+                recommendations.add("Ensure traceability throughout the system lifecycle");
+                recommendations.add("Provide clear information to users about capabilities, limitations, and purpose");
+                recommendations.add("Document oversight measures and human-AI interaction capabilities");
+                recommendations.add("Design system to allow for effective oversight by humans");
+                recommendations.add("Implement 'stop' buttons or similar intervention measures");
+                recommendations.add("Develop with appropriate levels of accuracy and cybersecurity measures");
+                recommendations.add("Test for potential discriminatory impacts and implement mitigations");
+                recommendations.add("Undergo formal conformity assessment before deployment");
+                recommendations.add("Register in the EU database before putting the system into service");
                 break;
                 
             case "Limited Risk":
-                recommendations.add("Implement transparency measures");
-                recommendations.add("Notify users when they interact with AI");
-                recommendations.add("Label AI-generated content");
-                recommendations.add("Maintain documentation of system capabilities");
-                recommendations.add("Provide clear information about AI system limitations");
-                recommendations.add("Establish procedures for handling user feedback");
-                recommendations.add("Monitor system performance and accuracy");
+                recommendations.add("Notify users that they are interacting with an AI system");
+                recommendations.add("Clearly label AI-generated or manipulated content");
+                recommendations.add("Design notifications to be accessible and difficult to miss");
+                recommendations.add("Ensure users can make informed choices based on transparent disclosures");
+                recommendations.add("Document transparency measures implemented in the system");
                 break;
                 
             case "Minimal Risk":
-                recommendations.add("Follow voluntary codes of conduct");
-                recommendations.add("Monitor for potential risks");
-                recommendations.add("Keep documentation of system operations");
-                recommendations.add("Stay informed about regulatory updates");
-                recommendations.add("Consider implementing basic transparency measures");
-                recommendations.add("Regularly review system impact");
+                recommendations.add("Consider adopting voluntary codes of conduct");
+                recommendations.add("Follow AI ethics principles as a matter of good practice");
+                recommendations.add("Stay informed of regulatory developments");
+                recommendations.add("Consider implementing selected high-risk requirements as best practice");
+                recommendations.add("Document your system's purpose and basic functioning");
                 break;
         }
         

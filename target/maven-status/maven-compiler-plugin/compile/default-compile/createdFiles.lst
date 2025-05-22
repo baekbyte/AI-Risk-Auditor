@@ -1,0 +1,5 @@
+com/euaiact/classifier/controller/ClassificationController.class
+com/euaiact/classifier/ClassifierApplication.class
+com/euaiact/classifier/model/ClassificationRequest.class
+com/euaiact/classifier/service/ClassificationService.class
+com/euaiact/classifier/model/ClassificationResponse.class

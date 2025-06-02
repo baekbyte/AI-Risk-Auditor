@@ -21,7 +21,7 @@ public class ClassificationRequest {
         required = true
     )
     @NotBlank(message = "System purpose is required")
-    @Size(min = 10, max = 1000, message = "System purpose must be between 10 and 1000 characters")
+    @Size(min = 20, max = 1000, message = "System purpose must be between 20 and 1000 characters") // Can use lower boundary for testing purposes
     private String systemPurpose;
 
     // Getters and Setters

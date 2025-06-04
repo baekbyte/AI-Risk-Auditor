@@ -1,4 +1,4 @@
-# AI Use Case Classifer: [EU AI ACT](https://artificialintelligenceact.eu/)
+# AI Risk Auditor: [EU AI ACT](https://artificialintelligenceact.eu/)
 
 This Java project is directly inspired by the EU AI Act's risk-based framework, which categorizes AI systems into different risk levels:
 - Prohibited AI Systems: Systems that pose unacceptable risks

@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from './components/Header';
-import Classifier from './components/Classifier';
+import ClassificationForm from './components/ClassificationForm';
 import './styles/global.css';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <main>
-        <Classifier />
+      <main className="container mx-auto px-4 py-8">
+        <ClassificationForm />
       </main>
     </div>
   );

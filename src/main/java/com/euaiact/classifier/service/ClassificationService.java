@@ -15,7 +15,7 @@ public class ClassificationService {
         response.setSystemName(request.getSystemName());
         response.setSystemPurpose(request.getSystemPurpose());
         
-        // Check if the system is prohibited
+        // Check if the system is prohibited using both text analysis and yes/no answers
         boolean isProhibited = checkProhibitedUseCase(request);
         response.setProhibited(isProhibited);
         
@@ -29,10 +29,10 @@ public class ClassificationService {
             return response;
         }
         
-        // Check if it's high risk
+        // Check if it's high risk using both text analysis and yes/no answers
         boolean isHighRisk = checkHighRiskUseCase(request);
         
-        // Check transparency requirements
+        // Check transparency requirements using both text analysis and yes/no answers
         boolean needsTransparency = checkTransparencyRequirements(request);
         
         // Determine final risk category
@@ -55,20 +55,31 @@ public class ClassificationService {
         String purpose = request.getSystemPurpose().toLowerCase();
         
         // Check for prohibited practices based on the system's purpose
-        return purpose.contains("subliminal") || 
-               purpose.contains("manipulative") ||
-               purpose.contains("exploit vulnerabilities") ||
-               purpose.contains("social scoring") ||
-               purpose.contains("real-time biometric") ||
-               purpose.contains("emotion recognition") ||
-               purpose.contains("facial recognition database") ||
-               purpose.contains("predictive policing");
+        boolean isProhibitedFromText = purpose.contains("subliminal") || 
+                                     purpose.contains("manipulative") ||
+                                     purpose.contains("exploit vulnerabilities") ||
+                                     purpose.contains("social scoring") ||
+                                     purpose.contains("real-time biometric") ||
+                                     purpose.contains("emotion recognition") ||
+                                     purpose.contains("facial recognition database") ||
+                                     purpose.contains("predictive policing");
+
+        // Check for prohibited practices using yes/no answers
+        boolean isProhibitedFromAnswers = Boolean.TRUE.equals(request.getUsesSubliminalTechniques()) ||
+                                        Boolean.TRUE.equals(request.getExploitsVulnerabilities()) ||
+                                        Boolean.TRUE.equals(request.getConductsSocialScoring()) ||
+                                        Boolean.TRUE.equals(request.getUsesRealTimeBiometric()) ||
+                                        Boolean.TRUE.equals(request.getUsesEmotionRecognition()) ||
+                                        Boolean.TRUE.equals(request.getCreatesFacialRecognitionDB()) ||
+                                        Boolean.TRUE.equals(request.getUsesPredictivePolicing());
+
+        return isProhibitedFromText || isProhibitedFromAnswers;
     }
     
     private boolean checkHighRiskUseCase(ClassificationRequest request) {
         String purpose = request.getSystemPurpose().toLowerCase();
         
-        // Check for high-risk domains
+        // Check for high-risk domains using text analysis
         boolean isHighRiskDomain = purpose.contains("biometric") ||
                                   purpose.contains("critical infrastructure") ||
                                   purpose.contains("education") ||
@@ -86,26 +97,43 @@ public class ClassificationService {
         // Check if it's a safety component
         boolean isSafetyComponent = purpose.contains("safety component") ||
                                    purpose.contains("product safety");
+
+        // Check high-risk domains using yes/no answers
+        boolean isHighRiskFromAnswers = Boolean.TRUE.equals(request.getUsedInBiometrics()) ||
+                                       Boolean.TRUE.equals(request.getUsedInCriticalInfrastructure()) ||
+                                       Boolean.TRUE.equals(request.getUsedInEducation()) ||
+                                       Boolean.TRUE.equals(request.getUsedInEmployment()) ||
+                                       Boolean.TRUE.equals(request.getUsedInEssentialServices()) ||
+                                       Boolean.TRUE.equals(request.getUsedInLawEnforcement()) ||
+                                       Boolean.TRUE.equals(request.getUsedInMigration()) ||
+                                       Boolean.TRUE.equals(request.getUsedInJustice()) ||
+                                       Boolean.TRUE.equals(request.getIsSafetyComponent());
         
-        return isHighRiskDomain || isSafetyComponent;
+        return isHighRiskDomain || isSafetyComponent || isHighRiskFromAnswers;
     }
     
     private boolean checkTransparencyRequirements(ClassificationRequest request) {
         String purpose = request.getSystemPurpose().toLowerCase();
         
-        // Check for transparency requirements
-        return purpose.contains("chatbot") ||
-               purpose.contains("human interaction") ||
-               purpose.contains("content generation") ||
-               purpose.contains("deepfake") ||
-               purpose.contains("emotion recognition") ||
-               purpose.contains("biometric categorization");
+        // Check for transparency requirements using text analysis
+        boolean needsTransparencyFromText = purpose.contains("chatbot") ||
+                                          purpose.contains("human interaction") ||
+                                          purpose.contains("content generation") ||
+                                          purpose.contains("deepfake") ||
+                                          purpose.contains("emotion recognition") ||
+                                          purpose.contains("biometric categorization");
+
+        // Check for transparency requirements using yes/no answers
+        boolean needsTransparencyFromAnswers = Boolean.TRUE.equals(request.getInteractsWithHumans()) ||
+                                             Boolean.TRUE.equals(request.getGeneratesContent()) ||
+                                             Boolean.TRUE.equals(request.getUsesEmotionOrBiometric());
+        
+        return needsTransparencyFromText || needsTransparencyFromAnswers;
     }
     
     private List<String> generateRecommendations(String riskCategory) {
         List<String> recommendations = new ArrayList<>();
         
-
         switch (riskCategory) {
             case "High-Risk":
                 recommendations.add("Implement a comprehensive risk management system that operates throughout the system lifecycle");

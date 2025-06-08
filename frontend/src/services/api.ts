@@ -4,6 +4,28 @@ import axios from 'axios';
 export interface ClassificationRequest {
     systemName: string;
     systemPurpose: string;
+    // Prohibited AI Practices Assessment
+    usesSubliminalTechniques?: boolean;
+    exploitsVulnerabilities?: boolean;
+    conductsSocialScoring?: boolean;
+    usesRealTimeBiometric?: boolean;
+    usesEmotionRecognition?: boolean;
+    createsFacialRecognitionDB?: boolean;
+    usesPredictivePolicing?: boolean;
+    // High-Risk AI Practices Assessment
+    usedInBiometrics?: boolean;
+    usedInCriticalInfrastructure?: boolean;
+    usedInEducation?: boolean;
+    usedInEmployment?: boolean;
+    usedInEssentialServices?: boolean;
+    usedInLawEnforcement?: boolean;
+    usedInMigration?: boolean;
+    usedInJustice?: boolean;
+    isSafetyComponent?: boolean;
+    // Transparency Requirements Assessment
+    interactsWithHumans?: boolean;
+    generatesContent?: boolean;
+    usesEmotionOrBiometric?: boolean;
 }
 
 export interface ClassificationResponse {

@@ -1,5 +1,8 @@
 import React from 'react';
 
+const logo = require('./img/logo.png');
+
+
 const Header: React.FC = () => {
   return (
     <header style={{
@@ -15,17 +18,19 @@ const Header: React.FC = () => {
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
+        <img src={logo} alt="Shield logo" style={{ height: '40px', width: 'auto' }} />
         <h1 style={{
           color: 'var(--primary-blue)',
           fontSize: '1.8rem',
           fontWeight: 600,
           margin: 0
         }}>
-          AI Use Case Classifier
+          AI Risk Auditor
         </h1>
       </div>
     </header>
   );
 };
+
 
 export default Header; 

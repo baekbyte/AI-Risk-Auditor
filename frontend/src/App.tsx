@@ -1,17 +1,25 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
+import LandingPage from './components/LandingPage';
 import ClassificationForm from './components/ClassificationForm';
 import './styles/global.css';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <Header />
-      <main className="container mx-auto px-4 py-8">
-        <ClassificationForm />
-      </main>
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Navigate to="/landing" replace />} />
+            <Route path="/landing" element={<LandingPage />} />
+            <Route path="/classification" element={<ClassificationForm />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

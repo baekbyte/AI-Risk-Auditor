@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import ClassificationForm from './components/ClassificationForm';
+import Classifier from './components/Classifier';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -14,6 +15,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/landing" replace />} />
             <Route path="/landing" element={<LandingPage />} />
+            <Route path="/classifier" element={<Classifier />} />
             <Route path="/classification" element={<ClassificationForm />} />
           </Routes>
         </main>

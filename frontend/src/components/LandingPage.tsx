@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 const LandingPage: React.FC = () => {
     const navigate = useNavigate();
 
-    const handleAuditClick = () => {
-        navigate('/classification');
+    const handleStartClick = () => {
+        navigate('/classifier');
     };
 
     return (
@@ -18,10 +18,10 @@ const LandingPage: React.FC = () => {
                     A tool to understand your AI system better
                 </p>
                 <button
-                    onClick={handleAuditClick}
+                    onClick={handleStartClick}
                     className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg font-medium"
                 >
-                    Audit
+                    Start
                 </button>
             </div>
         </div>

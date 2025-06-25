@@ -4,6 +4,7 @@ import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import ClassificationForm from './components/ClassificationForm';
 import Classifier from './components/Classifier';
+import ResultsPage from './components/ResultsPage';
 import './styles/global.css';
 
 const App: React.FC = () => {
@@ -17,6 +18,7 @@ const App: React.FC = () => {
             <Route path="/landing" element={<LandingPage />} />
             <Route path="/classifier" element={<Classifier />} />
             <Route path="/classification" element={<ClassificationForm />} />
+            <Route path="/results" element={<ResultsPage />} />
           </Routes>
         </main>
       </div>

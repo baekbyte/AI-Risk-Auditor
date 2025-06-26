@@ -62,6 +62,18 @@ export const classificationService = {
             throw new Error('Failed to make classification request');
         }
     },
+    /**
+     * Download the results file from the backend
+     * @param response The classification response to export
+     * @param fileName The desired file name
+     * @returns Promise with the file blob
+     */
+    downloadResultsFile: async (response: ClassificationResponse, fileName: string = 'Audit_Results.txt'): Promise<Blob> => {
+        const res = await api.post(`/classify/download?fileName=${encodeURIComponent(fileName)}`, response, {
+            responseType: 'blob',
+        });
+        return res.data as Blob;
+    },
 };
 
 export default classificationService; 

@@ -173,4 +173,108 @@ public class ClassificationService {
         
         return recommendations;
     }
+
+    // Export classification results and recommendations to a text file
+    public void exportResultsToFile(ClassificationResponse response, String fileName) {
+        try {
+            // Ensure .txt extension
+            if (!fileName.toLowerCase().endsWith(".txt")) {
+                fileName += ".txt";
+            }
+            java.io.FileWriter fileWriter = new java.io.FileWriter(fileName);
+            java.io.BufferedWriter writer = new java.io.BufferedWriter(fileWriter);
+
+            // Header
+            writer.write("=================================================");
+            writer.newLine();
+            writer.write("EU AI ACT RISK CLASSIFICATION ASSESSMENT");
+            writer.newLine();
+            writer.write("=================================================");
+            writer.newLine();
+            writer.newLine();
+
+            // System details
+            writer.write("SYSTEM INFORMATION");
+            writer.newLine();
+            writer.write("-----------------");
+            writer.newLine();
+            writer.write("System Name: " + response.getSystemName());
+            writer.newLine();
+            writer.write("System Purpose: " + response.getSystemPurpose());
+            writer.newLine();
+            writer.newLine();
+
+            // Classification results
+            writer.write("CLASSIFICATION RESULT");
+            writer.newLine();
+            writer.write("-------------------");
+            writer.newLine();
+            writer.write("EU AI Act Classification: " + response.getRiskCategory());
+            writer.newLine();
+            writer.newLine();
+
+            // Risk category explanation
+            writer.write("Risk Category Explanation:");
+            writer.newLine();
+            switch (response.getRiskCategory()) {
+                case "High-Risk":
+                    writer.write("High-risk AI systems require substantial compliance measures ");
+                    writer.newLine();
+                    writer.write("under the EU AI Act, including risk assessments, technical ");
+                    writer.newLine();
+                    writer.write("documentation, and human oversight.");
+                    break;
+                case "Limited Risk":
+                    writer.write("Limited risk AI systems must meet specific transparency ");
+                    writer.newLine();
+                    writer.write("obligations, such as notifying users they are interacting ");
+                    writer.newLine();
+                    writer.write("with an AI system or that content is artificially generated.");
+                    break;
+                case "Minimal Risk":
+                    writer.write("Minimal risk AI systems have few regulatory obligations ");
+                    writer.newLine();
+                    writer.write("under the EU AI Act, though voluntary codes of conduct ");
+                    writer.newLine();
+                    writer.write("are encouraged.");
+                    break;
+                case "PROHIBITED":
+                    writer.write("This AI system falls under prohibited practices according to the EU AI Act.");
+                    writer.newLine();
+                    writer.write("Consider consulting with a legal expert specializing in AI regulation.");
+                    break;
+            }
+            writer.newLine();
+            writer.newLine();
+
+            // Recommendations
+            writer.write("COMPLIANCE RECOMMENDATIONS");
+            writer.newLine();
+            writer.write("-------------------------");
+            writer.newLine();
+            int count = 1;
+            for (String recommendation : response.getRecommendations()) {
+                writer.write(count + ". " + recommendation);
+                writer.newLine();
+                count++;
+            }
+            writer.newLine();
+
+            // Disclaimer
+            writer.write("=================================================");
+            writer.newLine();
+            writer.write("DISCLAIMER: This assessment is provided for informational purposes only ");
+            writer.newLine();
+            writer.write("and should not be considered legal advice. Consult with legal experts ");
+            writer.newLine();
+            writer.write("for a comprehensive compliance assessment with the EU AI Act.");
+            writer.newLine();
+            writer.write("=================================================");
+
+            writer.close();
+        } catch (java.io.IOException e) {
+            // Log or handle error as needed
+            System.out.println("Error saving results to file: " + e.getMessage());
+        }
+    }
 } 

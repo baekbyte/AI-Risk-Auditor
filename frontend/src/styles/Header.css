@@ -1,10 +1,11 @@
 .header {
-  background-color: #ffffff;
-  padding: 1rem 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  padding: 1.25rem 2rem;
+  box-shadow: 0 2px 20px rgba(0, 102, 204, 0.08);
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: 1px solid rgba(0, 102, 204, 0.1);
 }
 
 .header-container {
@@ -12,21 +13,77 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
 }
 
 .header-logo {
-  height: 40px;
+  height: 48px;
   width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 102, 204, 0.1));
 }
 
 .header-title {
-  color: #1a56db;
-  font-size: 1.5rem;
-  font-weight: 600;
+  color: #0066cc;
+  font-size: 1.75rem;
+  font-weight: 700;
   margin: 0;
   display: flex;
   align-items: center;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #0066cc 0%, #004d99 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: #4a5568;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #0066cc;
+  background-color: rgba(0, 102, 204, 0.05);
+}
+
+.nav-link.active {
+  color: #0066cc;
+  background-color: rgba(0, 102, 204, 0.1);
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.5rem;
+  }
+
+  .header-logo {
+    height: 40px;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+  }
+
+  .header-nav {
+    gap: 1rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
 }
 
 @media (max-width: 640px) {
@@ -35,10 +92,19 @@
   }
 
   .header-logo {
-    height: 32px;
+    height: 36px;
   }
 
   .header-title {
     font-size: 1.25rem;
+  }
+
+  .header-nav {
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
   }
 } 

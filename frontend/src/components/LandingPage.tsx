@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/LandingPage.css';
 
 const LandingPage: React.FC = () => {
     const navigate = useNavigate();
@@ -9,20 +10,49 @@ const LandingPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="text-center space-y-8 p-8">
-                <h1 className="text-4xl font-bold text-gray-900">
-                    Welcome to the AI Risk Auditor
+        <div className="landing-container">
+            <div className="landing-content">
+                <h1 className="landing-title">
+                    AI Risk Auditor
                 </h1>
-                <p className="text-xl text-gray-600">
-                    A tool to understand your AI system better
+                <p className="landing-subtitle">
+                    Comprehensive AI System Analysis & Risk Assessment
+                </p>
+                <p className="landing-description">
+                    Understand your AI system's compliance with EU AI Act requirements. 
+                    Get detailed insights into risk levels, regulatory obligations, and 
+                    actionable recommendations for your AI implementation.
                 </p>
                 <button
                     onClick={handleStartClick}
-                    className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-lg font-medium"
+                    className="landing-button"
                 >
-                    Start
+                    Start Analysis
                 </button>
+
+                <div className="landing-features">
+                    <div className="feature-card">
+                        <div className="feature-icon">
+                            🔍
+                        </div>
+                        <h3 className="feature-title">Smart Analysis</h3>
+                        <p className="feature-description">
+                            Advanced classification system that accurately 
+                            categorizes your AI applications based on EU AI Act criteria.
+                        </p>
+                    </div>
+
+                    <div className="feature-card">
+                        <div className="feature-icon">
+                            📊
+                        </div>
+                        <h3 className="feature-title">Risk Assessment</h3>
+                        <p className="feature-description">
+                            Comprehensive risk evaluation with detailed breakdown of 
+                            compliance requirements and potential regulatory impacts.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     );

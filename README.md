@@ -140,18 +140,8 @@ AI-Use-Case-Classifier/
 └── README.md
 ```
 
-## 🤝 Contributing
-
-This project is designed to help organizations navigate the complex landscape of AI regulation. Contributions are welcome to improve accuracy, add new features, or enhance the user experience.
-
 ## ⚖️ Legal Disclaimer
 
 This tool is provided for informational purposes only and should not be considered legal advice. The classification results and recommendations are based on the EU AI Act framework but may not capture all nuances of your specific use case. Always consult with legal experts for comprehensive compliance assessment.
 
-## 📄 License
 
-This project is open source and available under the MIT License.
-
----
-
-**Built with ❤️ to help organizations navigate AI regulation responsibly.**

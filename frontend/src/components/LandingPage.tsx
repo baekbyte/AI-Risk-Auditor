@@ -19,7 +19,7 @@ const LandingPage: React.FC = () => {
                     Comprehensive AI System Analysis & Risk Assessment
                 </p>
                 <p className="landing-description">
-                    Understand your AI system's compliance with EU AI Act requirements. 
+                    Understand your AI system's compliance with the <a href='https://artificialintelligenceact.eu/'>EU AI Act</a> requirements. 
                     Get detailed insights into risk levels, regulatory obligations, and 
                     actionable recommendations for your AI implementation.
                 </p>
@@ -38,7 +38,7 @@ const LandingPage: React.FC = () => {
                         <h3 className="feature-title">Smart Analysis</h3>
                         <p className="feature-description">
                             Advanced classification system that accurately 
-                            categorizes your AI applications based on EU AI Act criteria.
+                            categorizes your AI applications based on the EU AI Act criteria.
                         </p>
                     </div>
 

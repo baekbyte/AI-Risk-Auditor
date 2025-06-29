@@ -62,7 +62,7 @@ const ResultsPage: React.FC = () => {
         <div className="results-header">
           <h1 className="results-title">Assessment Results</h1>
           <p className="results-subtitle">
-            Your AI system has been analyzed for EU AI Act compliance
+            Your AI system has been analyzed for the EU AI Act compliance
           </p>
         </div>
 

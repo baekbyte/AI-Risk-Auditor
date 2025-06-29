@@ -89,6 +89,9 @@ const ClassificationForm: React.FC = () => {
     setError(null);
     try {
       const result = await classificationService.classify(formData);
+      console.log('API Classification Result:', result);
+      console.log('isProhibited from API:', result.isProhibited);
+      console.log('riskCategory from API:', result.riskCategory);
       localStorage.setItem('classificationResult', JSON.stringify(result));
       localStorage.removeItem('classificationFormData');
       localStorage.removeItem('classificationFormPage');

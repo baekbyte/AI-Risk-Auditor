@@ -1,5 +1,6 @@
 package com.euaiact.classifier.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class ClassificationResponse {
         description = "Indicates if the AI system falls under prohibited practices",
         example = "false"
     )
+    @JsonProperty("isProhibited")
     private boolean isProhibited;
 
     // Getters and Setters

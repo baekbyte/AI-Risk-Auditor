@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { classificationService, ClassificationResponse as APIClassificationResponse } from '../services/api';
-
-interface ClassificationResponse {
-  riskCategory: string;
-  isProhibited: boolean;
-  recommendations: string[];
-}
+import { useNavigate } from 'react-router-dom';
+import { classificationService, ClassificationResponse } from '../services/api';
+import '../styles/ResultsPage.css';
 
 const ResultsPage: React.FC = () => {
+  const navigate = useNavigate();
   const [result, setResult] = useState<ClassificationResponse | null>(null);
   const [downloading, setDownloading] = useState(false);
 
   useEffect(() => {
     const storedResult = localStorage.getItem('classificationResult');
     if (storedResult) {
-      setResult(JSON.parse(storedResult));
+      const parsedResult = JSON.parse(storedResult);
+      console.log('Stored result:', parsedResult);
+      console.log('isProhibited value:', parsedResult.isProhibited);
+      console.log('riskCategory:', parsedResult.riskCategory);
+      setResult(parsedResult);
     }
   }, []);
 
@@ -22,13 +23,7 @@ const ResultsPage: React.FC = () => {
     if (!result) return;
     setDownloading(true);
     try {
-      // Add systemName and systemPurpose as empty strings for compatibility
-      const apiResult: APIClassificationResponse = {
-        systemName: '',
-        systemPurpose: '',
-        ...result,
-      };
-      const blob = await classificationService.downloadResultsFile(apiResult, 'Audit_Results.txt');
+      const blob = await classificationService.downloadResultsFile(result, 'Audit_Results.txt');
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -44,42 +39,111 @@ const ResultsPage: React.FC = () => {
     }
   };
 
+  const handleNewAssessment = () => {
+    navigate('/classifier');
+  };
+
+  const getRiskCategoryClass = (category: string) => {
+    const lowerCategory = category.toLowerCase();
+    if (lowerCategory.includes('prohibited')) return 'prohibited';
+    if (lowerCategory.includes('high')) return 'high-risk';
+    if (lowerCategory.includes('medium')) return 'medium-risk';
+    if (lowerCategory.includes('low')) return 'low-risk';
+    return 'minimal-risk';
+  };
+
+  const getStatusBadgeClass = (isProhibited: boolean) => {
+    return isProhibited ? 'prohibited' : 'allowed';
+  };
+
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-6">Classification Results</h2>
-      {result ? (
-        <>
-          <div className="p-6 bg-white shadow rounded-lg space-y-4">
-            <div>
-              <p className="text-sm font-medium text-gray-500">Risk Category</p>
-              <p className="mt-1 text-sm text-gray-900">{result.riskCategory}</p>
+    <div className="results-container">
+      <div className="results-content">
+        <div className="results-header">
+          <h1 className="results-title">Assessment Results</h1>
+          <p className="results-subtitle">
+            Your AI system has been analyzed for EU AI Act compliance
+          </p>
+        </div>
+
+        {result ? (
+          <>
+            <div className="results-card">
+              <div className="results-section">
+                <h2 className="results-section-title">Risk Category</h2>
+                <div className={`risk-category ${getRiskCategoryClass(result.riskCategory)}`}>
+                  {result.riskCategory}
+                </div>
+              </div>
+
+              <div className="results-section">
+                <h2 className="results-section-title">Compliance Status</h2>
+                <div className={`status-badge ${getStatusBadgeClass(result.isProhibited)}`}>
+                  {(() => {
+                    console.log('Rendering status badge, isProhibited:', result.isProhibited);
+                    return result.isProhibited ? 'Prohibited' : 'Allowed';
+                  })()}
+                </div>
+              </div>
+
+              <div className="results-section">
+                <h2 className="results-section-title">Recommendations</h2>
+                <ul className="recommendations-list">
+                  {result.recommendations.map((recommendation, idx) => (
+                    <li key={idx} className="recommendation-item">
+                      <div className="recommendation-icon">
+                        {idx + 1}
+                      </div>
+                      <div className="recommendation-text">
+                        {recommendation}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-medium text-gray-500">Status</p>
-              <p className="mt-1 text-sm text-gray-900">
-                {result.isProhibited ? 'Prohibited' : 'Allowed'}
-              </p>
+
+            <div className="results-actions">
+              <button
+                className="results-button results-button-secondary"
+                onClick={handleNewAssessment}
+              >
+                New Assessment
+              </button>
+              <button
+                className="results-button"
+                onClick={handleDownload}
+                disabled={downloading}
+              >
+                {downloading ? (
+                  <>
+                    <span className="loading-spinner"></span>
+                    Downloading...
+                  </>
+                ) : (
+                  'Download Results'
+                )}
+              </button>
             </div>
-            <div>
-              <p className="text-sm font-medium text-gray-500">Recommendations</p>
-              <ul className="mt-1 list-disc list-inside text-sm text-gray-900">
-                {result.recommendations.map((rec, idx) => (
-                  <li key={idx}>{rec}</li>
-                ))}
-              </ul>
+          </>
+        ) : (
+          <div className="no-results">
+            <div className="no-results-icon">📋</div>
+            <h2 className="no-results-title">No Results Found</h2>
+            <p className="no-results-text">
+              Please complete an assessment first to view your results.
+            </p>
+            <div className="results-actions">
+              <button
+                className="results-button"
+                onClick={handleNewAssessment}
+              >
+                Start Assessment
+              </button>
             </div>
           </div>
-          <button
-            className="mt-6 btn btn-primary"
-            onClick={handleDownload}
-            disabled={downloading}
-          >
-            {downloading ? 'Downloading...' : 'Download Results'}
-          </button>
-        </>
-      ) : (
-        <div className="p-4 bg-gray-100 rounded">No results found. Please complete an assessment first.</div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

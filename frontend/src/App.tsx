@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import LandingPage from './components/LandingPage';
 import ClassificationForm from './components/ClassificationForm';
@@ -10,12 +10,13 @@ import './App.css';
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router basename="/AI-Risk-Auditor">
       <div className="App">
         <Header />
         <main>
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<LandingPage />} />
             <Route path="/classifier" element={<Classifier />} />
             <Route path="/classification" element={<ClassificationForm />} />
             <Route path="/results" element={<ResultsPage />} />

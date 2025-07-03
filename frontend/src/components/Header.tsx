@@ -20,7 +20,7 @@ const Header: React.FC = () => {
         <nav className="header-nav">
           <Link 
             to="/" 
-            className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+            className={`nav-link ${location.pathname === '/home' ? 'active' : ''}`}
           >
             Home
           </Link>

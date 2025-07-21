@@ -10,7 +10,7 @@ import './App.css';
 
 const App: React.FC = () => {
   return (
-    <Router basename="/AI-Risk-Auditor">
+    <Router>
       <div className="App">
         <Header />
         <main>

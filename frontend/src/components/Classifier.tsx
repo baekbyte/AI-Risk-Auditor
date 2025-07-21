@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { classificationService, ClassificationRequest } from '../services/api';
+import { ClassificationRequest } from '../services/api';
 import '../styles/Classifier.css';
 
 const Classifier: React.FC = () => {

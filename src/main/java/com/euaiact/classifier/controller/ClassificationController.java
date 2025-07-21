@@ -28,7 +28,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/classify")
-@CrossOrigin(origins = "http://localhost:3000") // Allow requests from React frontend
+@CrossOrigin(origins = "https://ai-risk-auditor.vercel.app") // Allow requests from deployed Vercel frontend
 @Tag(name = "AI Classification", description = "API for classifying AI systems according to EU AI Act")
 public class ClassificationController {
 
